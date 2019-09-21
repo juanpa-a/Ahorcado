@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    
+    <title>Ascencio - Ahorcado</title>
+</head>
+<body>
+    
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">Ahorcado</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div id="stats" class="col-lg-12 col-md-12 col-sm-12">
+                <h2 id="playground" class="text-center"></h2>
+                <span>Tip: El juego de las <b>¡BUZZ WORDS!</b> del mundo de la programación</span>
+                <h3><u>Estadisticas</u></h3>
+                <span>Letras jugadas: <span id="played_letters"></span></span> <br/>
+                <span>Intentos restantes: <span id="attempts"></span></span> <br/>
+                <span>Juegos ganados: <span id="wins"></span></span> <br/>
+                <span>Juegos predidos: <span id="losses"></span></span> <br/>
+                <br>
+                <span>¡Añade tus propias palabras!</span>
+            </div>
+        </div>
+    </div>
+    
+    <script src="worgGuess.js"></script>
+</body>
+</html>
