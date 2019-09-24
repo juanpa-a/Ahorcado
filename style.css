@@ -1,15 +1,35 @@
 * {
     font-family: 'Mansalva', cursive;
-    color: #e9fefa;
+    color: #ECECEC;
     opacity: 0.95;
 }
 
-body {
-    background-image: url(https://fresheverything.ca/wp-content/uploads/2015/09/ChalkboardBackground.jpg);
-    opacity: 0.7;
+
+@media (max-width: 970px) {
+    .stats {
+        display: none;
+    }
+    .add {
+        display: none;
+    }
+    .tips {
+        display: none;
+    }
 }
 
+.nav-link {
+    font-size: 3rem;
+    color: #ECECEC;
+}
+.nav-link:hover {
+    font-size: 4rem;
+    color: #ECECEC;
+}
 
+body {
+    background-image: url(./Images/Chalkboard.jpg);
+    opacity: 0.7;
+}
 
 h3 {
     font-size: 3rem;
@@ -19,17 +39,9 @@ span {
     font-size: 2rem;
 }
 
-span:hover {
+.add:hover {
     font-weight: bold;
 }
-
-h3:hover {
-    font-weight: bold;
-}
-
-/* #word {
-    font-size: 5rem;
-} */
 
 #playground {
     font-size: 6rem;
@@ -37,11 +49,15 @@ h3:hover {
 }
 
 .navbar-brand {
-    color: #e9fefa;
+    color: #ECECEC;
     font-size: 5rem;
 }
 
 .navbar-brand:hover {
-    color: #e9fefa;
+    color: #ECECEC;
     font-weight: bold;
+}
+
+img {
+    height: 450px;
 }

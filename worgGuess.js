@@ -3,7 +3,6 @@ function random_int(i) {
 }
 
 let words = [
-    'c',
     'vim',
     'node',
     'linux',
@@ -23,8 +22,14 @@ let words = [
     'machine learning',
 ];
 
-let writing_sound = new Audio('./Sounds/write-chalk.wav');
+let writing_sounds = [
+    new Audio('./Sounds/write-chalk.wav'),
+    new Audio('./Sounds/writing-sound2.wav'),
+    new Audio('./Sounds/writing-sound3.wav'),
+    new Audio('./Sounds/writing-sound4.wav'),
+]
 let winning_sound = new Audio('./Sounds/you-win.wav');
+let game_has_ended = false;
 
 let current_guess = '';
 let word = words[random_int(words.length)];
@@ -43,8 +48,13 @@ let wins_elem = document.getElementById('wins');
 let losses = 0;
 let losses_elem = document.getElementById('losses');
 
-let attempts = word.length * 3;
+let attempts = word_letters.size * 2;
 let attempts_elem = document.getElementById('attempts');
+
+let hangman_image = document.getElementById('hangman-image');
+
+let custom_words = document.getElementById('add_file');
+
 
 function hide_word(word) {
     for (i = 0; i < word.length; i++) {
@@ -62,8 +72,39 @@ function update() {
         played += `${letter}, `
     })
     played_letters_elem.innerHTML = played;
+    get_image();
+
+    if (word_letters.size === correct_guesses.size) {
+        setTimeout(1000);
+        hangman_image.src = './Images/won_game.png';
+        playground_elem.innerHTML = '¡Ganaste!';
+    }
+    else if ( attempts === 0 ) {
+        playground_elem.innerHTML = 'Perdiste...';
+        if (!game_has_ended){
+            losses++;
+        }
+        game_has_ended = true;
+    }
+
 }
 
+function get_image() {
+    if (attempts === 0) {
+        hangman_image.src = './Images/lost_game.png';
+    }
+    else if (attempts === word_letters.size * 2) {
+        hangman_image.src = './Images/start_game.png';
+    }
+    else {
+        for ( i = 1; i < 6; i++) {
+            if (attempts <= (word_letters.size * 2) * (i / 6) ) {
+                hangman_image.src = `./Images/hangman_${i}.png`;
+                break;
+            }
+        }
+    }
+}
 
 function get_positions(letter) {
     let positions = [];
@@ -90,19 +131,26 @@ function restart() {
     played_letters.clear();
     correct_guesses.clear();
 
-    attempts = word.length * 3;
+    game_has_ended = false;
+    hangman_image.src = './Images/start_game.png';
+
+    attempts = word_letters.size * 2;
 }
+
+// event catchers
 
 document.addEventListener('keyup', function( pressed ) {
     // On repeated key press
-    if (played_letters.has(pressed.key)) {
-        // alert('¡Ya intentaste con esta letra!');
-    } 
-    else if (attempts <= 0) {
-        alert(`Intenta otra vez, la palabra era ${word}`);
+
+    if ( pressed.key === 'Enter' ) {
         restart();
     }
-    // On correct guess
+    else if (game_has_ended) {
+        1 === 1;
+    }
+    else if (played_letters.has(pressed.key)) {
+        1 === 1;
+    } 
     else if (word_letters.has(pressed.key)) {
 
         played_letters.add(pressed.key);
@@ -119,22 +167,23 @@ document.addEventListener('keyup', function( pressed ) {
         })
         // If he already won
         if ( correct_guesses.size === word_letters.size ) {
-            // alert('¡Ganaste 50 puntos imaginarios!');
             wins++;
-            // restart();
-            playground_elem.innerHTML = '¡GANASTE!';
             winning_sound.play();
         } else {
-            writing_sound.play();
-            playground_elem.innerHTML = hidden_word;
+            writing_sounds[random_int(writing_sounds.length)].play();
         }
     }
     // On incorrect guess
     else {
-        played_letters.add(pressed.key);
-        attempts--;
+        if (correct_guesses.size === word_letters.size) {
+            1===1;
+        } else {
+            played_letters.add(pressed.key);
+            if (attempts > 0) {
+                attempts--;
+            }
+        }
     }
-
     update();
 })
 
