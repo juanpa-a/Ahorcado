@@ -53,7 +53,16 @@ let attempts_elem = document.getElementById('attempts');
 
 let hangman_image = document.getElementById('hangman-image');
 
-let custom_words = document.getElementById('add_file');
+let custom_words = document.querySelector('input[type="file"]');
+
+custom_words.addEventListener('change', function() {
+    let reader = new FileReader();
+    reader.onload = function(){
+        words = reader.result.split(',\n');
+        words.pop();
+    }
+    reader.readAsText(custom_words.files[0])
+})
 
 
 function hide_word(word) {
@@ -75,9 +84,8 @@ function update() {
     get_image();
 
     if (word_letters.size === correct_guesses.size) {
-        setTimeout(1000);
         hangman_image.src = './Images/won_game.png';
-        playground_elem.innerHTML = '¡Ganaste!';
+        // playground_elem.innerHTML = '¡Ganaste!';
     }
     else if ( attempts === 0 ) {
         playground_elem.innerHTML = 'Perdiste...';
